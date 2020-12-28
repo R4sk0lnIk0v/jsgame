@@ -1,0 +1,27 @@
+{
+  "name": "jsgame",
+  "version": "1.0.0",
+  "description": "juguin",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R4sk0lnIk0v/jsgame.git"
+  },
+  "author": "Theus, Tx e Paulin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/R4sk0lnIk0v/jsgame/issues"
+  },
+  "homepage": "https://github.com/R4sk0lnIk0v/jsgame#readme",
+  "dependencies": {
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1"
+  }
+}
