@@ -20,8 +20,7 @@
     "url": "https://github.com/R4sk0lnIk0v/jsgame/issues"
   },
   "homepage": "https://github.com/R4sk0lnIk0v/jsgame#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "build": {
     "appId": "juguin",
     "mac": {
