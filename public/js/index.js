@@ -1,7 +1,25 @@
 ((global)=>{
   "use strict";
+  const Keyboard = require("./public/js/Keyboard");
+  const key = new Keyboard(document);
   
-  function main() {
+  function main(keyboard) {
+
+    if(keyboard.isKeyPressed('W')){
+      console.log('W pressed');
+    }
+    if(keyboard.isKeyPressed('S')){
+      console.log('S pressed');
+    }
+    if(keyboard.isKeyPressed('D')){
+      console.log('A pressed');
+    }
+
+    let e;    
+    while(e = keyboard.peekAndRemoveKeyEvents()){
+      console.log(e);
+    }
+
     // Get A WebGL context
     /** @type {HTMLCanvasElement} */
     var canvas = document.querySelector("#canvas");
@@ -94,6 +112,12 @@
       x2, y2,
     ]), gl.STATIC_DRAW);
   }
-  
-  main();
+  function call()
+  {
+    main(key);
+    setTimeout(function(){ call();}, 100);
+  }
+
+  call();
+
 })(this)
