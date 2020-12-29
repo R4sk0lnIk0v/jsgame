@@ -14,7 +14,10 @@ class Keyboard {
         documentHandler.addEventListener('keydown', this.keyDown, false);
         documentHandler.addEventListener('keyup', this.keyUp, false);
     }
-
+    /**
+     * Verifica se tecla está pressionada (retorna true or false)
+     * @param {*"Valor da letra do teclado ex: 'A'"} keyStr 
+     */
     isKeyPressed(keyStr){
         const keyCode = keyStr.charCodeAt('0');
         if(keyCode < 255){
@@ -24,7 +27,10 @@ class Keyboard {
             return false;
         }
     }
-
+    /**
+     * 
+     * @param {*"Evento recebido de onkeydown"} event 
+     */
     keyDown(event){
         if(event.keyCode < 255){
             Keyboard.keyState[event.keyCode] = true;
@@ -34,7 +40,10 @@ class Keyboard {
             }
         }
     }
-
+    /**
+     * 
+     * @param {*"Evento recebido de onkeyup"} event 
+     */
     keyUp(event){
         if(event.keyCode < 255){
             Keyboard.keyState[event.keyCode] = false;
@@ -45,14 +54,18 @@ class Keyboard {
             }
         }
     }
-
+    /**
+     * Retorna evento
+     */
     peekKeyEvents(){
         if(Keyboard.keyEvents.length > 0) {
             return Keyboard.keyEvents[Keyboard.keyEvents.length - 1];
         }
         return false;
     }
-
+    /**
+     * Retorna evento e o tira da lista
+     */
     peekAndRemoveKeyEvents(){
         if(Keyboard.keyEvents.length > 0) {
             return Keyboard.keyEvents.pop();
