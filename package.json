@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "electron": "^11.1.1",
-    "electron-builder": "^22.9.1"
+    "electron-builder": "^22.9.1",
+    "spectorjs": "^0.9.17",
+    "webpack": "^5.11.1"
   }
 }
