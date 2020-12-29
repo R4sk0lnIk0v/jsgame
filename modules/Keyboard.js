@@ -26,7 +26,7 @@ class Keyboard {
     }
 
     keyDown(event){
-        if(event.keyCode < 255){
+        if(event.keyCode < 255 && !Keyboard.keyState[event.keyCode]){
             Keyboard.keyState[event.keyCode] = true;
             const len = Keyboard.keyEvents.push(event);
             if(len > 25){
@@ -36,7 +36,7 @@ class Keyboard {
     }
 
     keyUp(event){
-        if(event.keyCode < 255){
+        if(event.keyCode < 255 && Keyboard.keyState[event.keyCode]){
             Keyboard.keyState[event.keyCode] = false;
             const len = Keyboard.keyEvents.push(event);
 

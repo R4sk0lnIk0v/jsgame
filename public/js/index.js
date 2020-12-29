@@ -12,9 +12,12 @@ var pos = new Vetor2D(0, 0);
 const velX = new Vetor2D(1, 0);
 const velY = new Vetor2D(0, 1);
 
-const ang = Math.PI / 4;
-const rotMatrix = new Matriz2x2(Math.cos(ang), -Math.sin(ang), Math.sin(ang), Math.cos(ang)); 
+const ang = Math.PI / 2;
+const ang2 = Math.PI / 2;
+const rotMatrixPos = new Matriz2x2(Math.cos(ang), -Math.sin(ang), Math.sin(ang), Math.cos(ang)); 
+const rotMatrixNeg = new Matriz2x2(Math.cos(ang2), -Math.sin(ang2), Math.sin(ang2), Math.cos(ang2)); 
 
+const rotMatrix = rotMatrixPos.multiplicaMatriz(rotMatrixNeg);
 
 function main(keyboard) {
 
@@ -31,7 +34,6 @@ function main(keyboard) {
     pos = pos.subtrai(velX);
   }
 
-  console.log(pos);
 
   let e;    
   while(e = keyboard.peekAndRemoveKeyEvents()){
@@ -41,6 +43,8 @@ function main(keyboard) {
     }
 
   }
+
+  console.log(pos);
 }
 
 let image = new Image();
