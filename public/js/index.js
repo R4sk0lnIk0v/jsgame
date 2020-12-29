@@ -32,8 +32,7 @@ image.onload = () => {
   }
 
   shader.renderAsset(gl, image);
-  window.addEventListener('resize', shader.renderAsset(image));
-  
-  main(key);
-  setTimeout(function(){ call();}, 100);
+  // window.addEventListener('resize', shader.renderAsset(image));
+
+  setInterval(function(){ main(key);}, 100);
 };
