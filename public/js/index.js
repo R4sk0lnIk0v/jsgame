@@ -1,5 +1,5 @@
 const ShaderHandler = require("../../modules/ShaderHandler");
-const Keyboard = require("./public/js/Keyboard");
+const Keyboard = require("../../modules/Keyboard");
 
 const shader = new ShaderHandler();
 const key = new Keyboard(document);
