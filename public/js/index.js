@@ -1,10 +1,8 @@
-"use strict";
-
 const ShaderHandler = require("../../modules/ShaderHandler");
 
 const shader = new ShaderHandler();
 
-let image = document.createElement('img');
+let image = new Image();
 image.src = __dirname + "/../../assets/cyberpunk.jpg";
 image.onload = () => {
   shader.renderAsset(image);
