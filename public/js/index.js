@@ -1,24 +1,45 @@
 const ShaderHandler = require("../../modules/ShaderHandler");
 const Keyboard = require("../../modules/Keyboard");
+const Matriz2x2 = require("../../modules/Matriz2x2");
+const Vetor2D = require("../../modules/Vetor2D");
+const { SingleEntryPlugin } = require("webpack");
 
 const shader = new ShaderHandler();
 const key = new Keyboard(document);
 
+var pos = new Vetor2D(0, 0);
+
+const velX = new Vetor2D(1, 0);
+const velY = new Vetor2D(0, 1);
+
+const ang = Math.PI / 4;
+const rotMatrix = new Matriz2x2(Math.cos(ang), -Math.sin(ang), Math.sin(ang), Math.cos(ang)); 
+
+
 function main(keyboard) {
 
   if(keyboard.isKeyPressed('W')){
-    console.log('W pressed');
+    pos = pos.soma(velY);
   }
   if(keyboard.isKeyPressed('S')){
-    console.log('S pressed');
+    pos = pos.subtrai(velY);
   }
   if(keyboard.isKeyPressed('D')){
-    console.log('A pressed');
+    pos = pos.soma(velX);
   }
+  if(keyboard.isKeyPressed('A')){
+    pos = pos.subtrai(velX);
+  }
+
+  console.log(pos);
 
   let e;    
   while(e = keyboard.peekAndRemoveKeyEvents()){
-    console.log(e);
+
+    if(e.type=="keydown" && e.key== "r"){
+      pos = rotMatrix.multiplicaVetor(pos);
+    }
+
   }
 }
 
