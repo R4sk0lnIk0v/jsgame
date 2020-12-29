@@ -12,8 +12,11 @@ function main(keyboard) {
   if(keyboard.isKeyPressed('S')){
     console.log('S pressed');
   }
-  if(keyboard.isKeyPressed('D')){
+  if(keyboard.isKeyPressed('A')){
     console.log('A pressed');
+  }
+  if(keyboard.isKeyPressed('D')){
+    console.log('D pressed');
   }
 
   let e;    
