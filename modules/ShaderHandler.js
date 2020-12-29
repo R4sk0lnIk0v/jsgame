@@ -147,13 +147,7 @@ class ShaderHandler {
         gl.deleteShader(shader);
     }
     
-    renderAsset (image) {
-        let canvas = document.querySelector("#canvas");
-        let gl = canvas.getContext("webgl2");
-        if (!gl) {
-            return;
-        }
-
+    renderAsset (gl, image) {
         let vertexShader = this.createShader(gl, gl.VERTEX_SHADER, "imgVertex");
         let fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, "imgFragment");
         
@@ -216,10 +210,6 @@ class ShaderHandler {
         
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
         
-        for(var i = 0; i<8; i++) {
-            gl.disableVertexAttribArray(i);
-        }
-        
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         
@@ -233,9 +223,10 @@ class ShaderHandler {
         
         gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
         
-        this.setRectangle(gl, 10, 10, image.width, image.height);
+        this.setRectangle(gl, 0, 0, image.width, image.height);
         
         gl.drawArrays(gl.TRIANGLES, 0, 6);
+        console.log(image);
     }
     
     setRectangle(gl, x, y, width, height) {
