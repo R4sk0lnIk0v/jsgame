@@ -2,7 +2,6 @@ const ShaderHandler = require("../../modules/ShaderHandler");
 const Keyboard = require("../../modules/Keyboard");
 const Matriz2x2 = require("../../modules/Matriz2x2");
 const Vetor2D = require("../../modules/Vetor2D");
-const { SingleEntryPlugin } = require("webpack");
 
 const shader = new ShaderHandler();
 const key = new Keyboard(document);
