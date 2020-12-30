@@ -5,7 +5,7 @@ class Keyboard {
         Keyboard._keyState = new Array(255);
         Keyboard._keyEvents = new Array();
 
-        for(let i = 0; i < Keyboard.keyState.length; i++){
+        for(let i = 0; i < Keyboard._keyState.length; i++){
             Keyboard._keyState[i] = false;
         }
 
@@ -30,7 +30,7 @@ class Keyboard {
      * @param {*"Evento recebido de onkeydown"} event 
      */
     keyDown(event){
-        if(event.keyCode < 255 && !Keyboard.keyState[event.keyCode]){
+        if(event.keyCode < 255 && !Keyboard._keyState[event.keyCode]){
             Keyboard._keyState[event.keyCode] = true;
             const len = Keyboard._keyEvents.push(event);
             if(len > 25){
@@ -43,7 +43,7 @@ class Keyboard {
      * @param {*"Evento recebido de onkeyup"} event 
      */
     keyUp(event){
-        if(event.keyCode < 255 && Keyboard.keyState[event.keyCode]){
+        if(event.keyCode < 255 && Keyboard._keyState[event.keyCode]){
             Keyboard._keyState[event.keyCode] = false;
             const len = Keyboard._keyEvents.push(event);
 
@@ -56,8 +56,8 @@ class Keyboard {
      * Retorna evento
      */
     peekKeyEvents(){
-        if(Keyboard.keyEvents.length > 0) {
-            return Keyboard._keyEvents[Keyboard.keyEvents.length - 1];
+        if(Keyboard._keyEvents.length > 0) {
+            return Keyboard._keyEvents[Keyboard._keyEvents.length - 1];
         }
         return false;
     }
@@ -65,7 +65,7 @@ class Keyboard {
      * Retorna evento e o tira da lista
      */
     peekAndRemoveKeyEvents(){
-        if(Keyboard.keyEvents.length > 0) {
+        if(Keyboard._keyEvents.length > 0) {
             return Keyboard._keyEvents.pop();
         }
         return false;
