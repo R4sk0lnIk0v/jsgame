@@ -26,14 +26,12 @@ function main(keyboard) {
   }
   if(keyboard.isKeyPressed('S')){
     pos = pos.subtrai(velY);
-  }
+  }  
   if(keyboard.isKeyPressed('D')){
     pos = pos.soma(velX);
   }
   if(keyboard.isKeyPressed('A')){
     pos = pos.subtrai(velX);
-  }
-
 
   let e;    
   while(e = keyboard.peekAndRemoveKeyEvents()){
