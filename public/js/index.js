@@ -3,6 +3,8 @@ const Keyboard = require("../../modules/Keyboard");
 const Matriz2x2 = require("../../modules/Matriz2x2");
 const Vetor2D = require("../../modules/Vetor2D");
 
+const Character = require("../../modules/Character");
+
 const shader = new ShaderHandler();
 const key = new Keyboard(document);
 
@@ -18,31 +20,52 @@ const rotMatrixNeg = new Matriz2x2(Math.cos(ang2), -Math.sin(ang2), Math.sin(ang
 
 const rotMatrix = rotMatrixPos.multiplicaMatriz(rotMatrixNeg);
 
-function main(keyboard) {
+persArthur = new Character(new Vetor2D(0, 0), 15, 80);
 
-  if(keyboard.isKeyPressed('W')){
-    pos = pos.soma(velY);
-  }
-  if(keyboard.isKeyPressed('S')){
-    pos = pos.subtrai(velY);
-  }  
-  if(keyboard.isKeyPressed('D')){
-    pos = pos.soma(velX);
-  }
-  if(keyboard.isKeyPressed('A')){
-    pos = pos.subtrai(velX);
-  }
+function main(keyboard) {
+  
+  persArthur.tick();
 
   let e;    
   while(e = keyboard.peekAndRemoveKeyEvents()){
-
-    if(e.type=="keydown" && e.key== "r"){
-      pos = rotMatrix.multiplicaVetor(pos);
+    if(e.type=="keydown"){
+      switch(e.key){
+        case 'w':
+        case 'ArrowUp':
+          persArthur.andarCima();
+          break;
+        case 's':
+        case 'ArrowDown':
+          persArthur.andarBaixo();
+          break;
+        case 'd':
+        case 'ArrowRight':
+          persArthur.andarDireita(); 
+          break;
+        case 'a':
+        case 'ArrowLeft':
+          persArthur.andarEsquerda();
+          break;
+        default:
+      }
     }
-
+    
+    if(e.type=="keyup"){
+      switch(e.key){
+        case 'w':            
+        case 's':
+        case 'd':
+        case 'a':
+        case 'ArrowUp':
+        case 'ArrowDown':
+        case 'ArrowRight':
+        case 'ArrowLeft':
+          persArthur.parar();
+          break;
+        default:
+      }
+    }
   }
-
-  console.log(pos);
 }
 
 let image = new Image();

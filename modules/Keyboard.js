@@ -66,7 +66,7 @@ class Keyboard {
      */
     peekAndRemoveKeyEvents(){
         if(Keyboard._keyEvents.length > 0) {
-            return Keyboard._keyEvents.pop();
+            return Keyboard._keyEvents.shift();
         }
         return false;
     }
