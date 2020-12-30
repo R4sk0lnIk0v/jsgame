@@ -1,11 +1,10 @@
-const ShaderHandler = require("../../modules/ShaderHandler");
 const Keyboard = require("../../modules/Keyboard");
+const AssetObject = require("../../modules/AssetObject");
 
-const shader = new ShaderHandler();
 const key = new Keyboard(document);
 
 function main(keyboard) {
-
+  
   if(keyboard.isKeyPressed('W')){
     console.log('W pressed');
   }
@@ -18,24 +17,25 @@ function main(keyboard) {
   if(keyboard.isKeyPressed('D')){
     console.log('D pressed');
   }
-
+  
   let e;    
   while(e = keyboard.peekAndRemoveKeyEvents()){
     console.log(e);
   }
 }
 
-let image = new Image();
-image.src = __dirname + "/../../assets/cyberpunk.png";
-image.onload = () => {
-  let canvas = document.querySelector("#canvas");
-  let gl = canvas.getContext("webgl2");
-  if (!gl) {
-    return;
-  }
+let canvas = document.querySelector("#canvas");
+let gl = canvas.getContext("webgl2");
+if (gl) {
+  let galinha = new AssetObject(gl, __dirname + "/../../assets/galinha.png", 75, 100, "galinha", 300, 30, 0, 0, 1, 1);
+  let galo = new AssetObject(gl, __dirname + "/../../assets/Galo.png", 85, 125, "galo", 45, 30, 0, 0, 1, 1);
+  galinha.renderObject();
+  galo.renderObject();
 
-  shader.renderAsset(gl, image);
-  // window.addEventListener('resize', shader.renderAsset(image));
+  setTimeout(()=>{
+    galo.updateObjectPosition(100, 30);
+    galinha.updateObjectPosition(200, 30);
+  },5000);
+}
 
-  setInterval(function(){ main(key);}, 100);
-};
+setInterval(function(){ main(key);}, 100);

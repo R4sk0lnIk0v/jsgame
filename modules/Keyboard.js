@@ -9,8 +9,6 @@ class Keyboard {
             Keyboard.keyState[i] = false;
         }
 
-        console.log(this.keyState);
-
         documentHandler.addEventListener('keydown', this.keyDown, false);
         documentHandler.addEventListener('keyup', this.keyUp, false);
     }

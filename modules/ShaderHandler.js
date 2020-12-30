@@ -86,6 +86,10 @@ void main() {
 class ShaderHandler {
     constructor () {}
     
+    /**
+     * "Retorna a source do shader requisitado"
+     * @param {*"Tipo de shader que quer o retorno"} sourceType 
+     */
     getShaderSource(sourceType) {
         switch (sourceType) {
             case "vertex":
@@ -110,6 +114,12 @@ class ShaderHandler {
         }
     }
     
+    /**
+     * "Compila os shaders para serem usados no programa"
+     * @param {*"Canvas onde será renderizado"} gl 
+     * @param {*"Tipo de Shader que será compilado"} type 
+     * @param {*"Tipo da Source a qual será usada para compilar o Shader"} sourceType 
+     */
     createShader (gl, type, sourceType) {
         let source;
         switch (sourceType) {
@@ -147,7 +157,18 @@ class ShaderHandler {
         gl.deleteShader(shader);
     }
     
-    renderAsset (gl, image) {
+    /**
+     * "Renderiza o asset passado como parâmetro no canvas"
+     * @param {*"Canvas onde será renderizado"} gl 
+     * @param {*"Objeto de imagem com src previamente criado"} image
+     * @param {*"Posição do objeto renderizado no eixo x"} posX
+     * @param {*"Posição do objeto renderizado no eixo y"} posY
+     * @param {*"Rotação do objeto renderizado no eixo x"} rotX
+     * @param {*"Rotação do objeto renderizado no eixo y"} rotY
+     * @param {*"Escala do objeto renderizado no eixo x"} scaleX
+     * @param {*"Escala do objeto renderizado no eixo y"} scaleY
+     */
+    renderAsset (gl, image, maxWidth, maxHeight, posX=0, posY=0, rotX=0, rotY=0, scaleX=1, scaleY=1) {
         let vertexShader = this.createShader(gl, gl.VERTEX_SHADER, "imgVertex");
         let fragmentShader = this.createShader(gl, gl.FRAGMENT_SHADER, "imgFragment");
         
@@ -210,8 +231,8 @@ class ShaderHandler {
         
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
         
-        gl.clearColor(0, 0, 0, 0);
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        // gl.clearColor(0, 0, 0, 0);
+        // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         
         gl.useProgram(program);
         
@@ -223,12 +244,19 @@ class ShaderHandler {
         
         gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
         
-        this.setRectangle(gl, 0, 0, image.width, image.height);
+        this.setRectangle(gl, posX, posY, maxWidth, maxHeight);
         
         gl.drawArrays(gl.TRIANGLES, 0, 6);
-        console.log(image);
     }
     
+    /**
+     * "Cria o retêngulo da imagem a ser renderizada no canvas"
+     * @param {*"Canvas onde será renderizado"} gl 
+     * @param {*"Posição inicial do objeto no eixo x"} x 
+     * @param {*"Posição inicial do objeto no eixo y"} y 
+     * @param {*"Largura da imagem"} width 
+     * @param {*"Altura da imagem"} height 
+     */
     setRectangle(gl, x, y, width, height) {
         var x1 = x;
         var x2 = x + width;
@@ -244,6 +272,13 @@ class ShaderHandler {
         ]), gl.STATIC_DRAW);
     }
     
+    /**
+     * "Cria o programa que habilita o uso da placa de video"
+     * @param {*"Canvas onde será renderizado"} gl 
+     * @param {*"Shader do tipo vertex já compilado"} vertexShader 
+     * @param {*"Shader do tipo fragment já compilado"} fragmentShader 
+     */
+
     createProgram (gl, vertexShader, fragmentShader) {
         var program = gl.createProgram();
         gl.attachShader(program, vertexShader);
