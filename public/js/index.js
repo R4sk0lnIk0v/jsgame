@@ -32,6 +32,7 @@ function main(keyboard) {
   }
   if(keyboard.isKeyPressed('A')){
     pos = pos.subtrai(velX);
+  }
 
   let e;    
   while(e = keyboard.peekAndRemoveKeyEvents()){
