@@ -23,11 +23,13 @@ const rotMatrix = rotMatrixPos.multiplicaMatriz(rotMatrixNeg);
 persArthur = new Character(new Vetor2D(0, 0), 15, 80);
 
 // debuging
+/*
 console.log(gl.getParameter(gl.RENDERER));
 console.log(gl.getParameter(gl.VENDOR));
 const dbgRenderInfo = gl.getExtension("WEBGL_debug_renderer_info");
 console.log(gl.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL));
 console.log(gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL));
+*/
 
 function main(keyboard) {
 
